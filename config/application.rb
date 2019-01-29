@@ -12,6 +12,7 @@ require "action_view/railtie"
 require "action_cable/engine"
 # require "sprockets/railtie"
 require "rails/test_unit/railtie"
+require "sprockets/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -31,5 +32,9 @@ module CreatorsclubApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+    # This is required for Active Admin support on a rails API only app
+    config.middleware.use ActionDispatch::Flash
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
   end
 end
