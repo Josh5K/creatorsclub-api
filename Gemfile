@@ -49,3 +49,5 @@ gem 'devise'
 gem 'turbolinks'
 gem 'bootstrap-sass', '~> 3.4.0'
 gem 'sassc-rails', '>= 2.0.0'
+gem 'dotenv-rails'
+gem "rest-client"

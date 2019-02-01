@@ -4,7 +4,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Creatorsclub Api"
+  config.site_title = "Creators Club Api"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -290,4 +290,5 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
+  config.comments_registration_name = 'AdminComment'
 end
