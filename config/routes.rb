@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  config = ActiveAdmin::Devise.config
+  devise_for :admin_users, config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace 'api' do
@@ -9,6 +10,7 @@ Rails.application.routes.draw do
       resources :comments
       resources :replies
       resources :sellers
+      resources :products
     end
   end
 end

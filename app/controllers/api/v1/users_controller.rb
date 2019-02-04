@@ -3,7 +3,7 @@ module Api
         class UsersController < ApplicationController
             def index
                 users = User.all
-                render json: users
+                render status: 200, json: { message: users }
             end
         end
     end
