@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  printful_varient_id: 1
+  name: MyString
+  image: MyString
+  cc_price: 
+  seller_price: 
+  product_id: 1
+
+two:
+  printful_varient_id: 1
+  name: MyString
+  image: MyString
+  cc_price: 
+  seller_price: 
+  product_id: 1
