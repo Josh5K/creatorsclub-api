@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_29_203331) do
+ActiveRecord::Schema.define(version: 2019_02_08_191442) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -45,16 +45,24 @@ ActiveRecord::Schema.define(version: 2019_01_29_203331) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "products", force: :cascade do |t|
+    t.integer "printful_id"
+    t.string "name"
+    t.integer "seller_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "replies", force: :cascade do |t|
     t.integer "user_id"
     t.integer "comment_id"
-    t.text "comment"
+    t.text "reply"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "sellers", force: :cascade do |t|
-    t.string "category_name"
+    t.integer "category"
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -77,6 +85,17 @@ ActiveRecord::Schema.define(version: 2019_01_29_203331) do
   create_table "users_sellers", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "seller_id"
+  end
+
+  create_table "variants", force: :cascade do |t|
+    t.integer "printful_varient_id"
+    t.string "name"
+    t.string "image"
+    t.decimal "cc_price"
+    t.decimal "seller_price"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
