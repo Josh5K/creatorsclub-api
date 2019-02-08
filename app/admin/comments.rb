@@ -12,6 +12,6 @@ ActiveAdmin.register Comment do
 #   permitted
 # end
 
-permit_params :user_id, :comment
+permit_params :product_id, :user_id, :comment
 
 end

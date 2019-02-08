@@ -10,6 +10,9 @@ module Api
                 orders = JSON.parse orders
                 render json: orders
             end
+            def create
+
+            end
         end
     end
 end

@@ -16,7 +16,9 @@ module Api
                 render status: 200, json: { message: user }
             end
             def sellers
-                users = Seller.Where(category => params[:category]).user
+                exclude_columns = ['password']
+                columns = User.attribute_names - exclude_columns
+                users = Seller.where(:category => params[:category])
                 render status: 200, json: { message: users }
             end
         end

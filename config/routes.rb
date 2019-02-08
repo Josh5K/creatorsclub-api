@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :replies
       resources :sellers
       resources :products
+      get 'users/seller/:category', to: 'users#sellers'
     end
   end
 end
