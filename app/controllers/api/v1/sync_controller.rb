@@ -9,15 +9,21 @@ module Api
                 )
                 products = JSON.parse products
                 products['result'].each do |product|
-                    existingProduct = Product.where(:printful_id => product['id'])
-                    if existingProduct.Count != 0
-                        p = Product.new
-                        p.printful_id = product['id']
-                        p.name = product['name']
-                        p.save
-                    else
-                        existingProduct.name = product['name']
-                        existingProduct.save
+
+                    category = product['name'][0...6]
+                    seller = Seller.Where(:category => category)
+                    if seller.count == 1
+                        existingProduct = Product.where(:printful_id => product['id'])
+                        if existingProduct.Count != 0
+                            p = Product.new
+                            p.printful_id = product['id']
+                            p.name = product['name']
+                            seller.product << p
+                            p.save
+                        else
+                            existingProduct.name = product['name']
+                            existingProduct.save
+                        end
                     end
                 end
             end
