@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2019_02_08_191442) do
   end
 
   create_table "variants", force: :cascade do |t|
-    t.integer "printful_varient_id"
+    t.integer "printful_variant_id"
     t.string "name"
     t.string "image"
     t.decimal "cc_price"

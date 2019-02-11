@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       resources :replies
       resources :sellers
       resources :products
+      get 'sync/products', to: 'sync#products'
+      get 'sync/variants', to: 'sync#variants'
       get 'users/seller/:category', to: 'users#sellers'
     end
   end
