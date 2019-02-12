@@ -53,6 +53,31 @@ module Api
                 end
             end
 
+            def update
+                u = User.where(:username => params[:username]).first
+                if request.headers['email'].present?
+                    u.email = request.headers['email']
+                end
+                if request.headers['profile_picture'].present?
+                    u.profile_picture = request.headers['profile_picture']
+                end
+                if request.headers['youtube'].present?
+                    u.youtube = request.headers['youtube']
+                end
+                if request.headers['twitter'].present?
+                    u.twitter = request.headers['twitter']
+                end
+                if request.headers['facebook'].present?
+                    u.facebook = request.headers['facebook']
+                end
+                if request.headers['about'].present?
+                    u.about = request.headers['about']
+                end
+                if request.headers['password'].present?
+                    u.password = request.headers['password']
+                end
+                render status: 200, json: { message: "#{u.username} has been updated!"}
+            end
 
         end
     end

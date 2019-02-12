@@ -1,7 +1,7 @@
 class CreateVariants < ActiveRecord::Migration[5.2]
   def change
     create_table :variants do |t|
-      t.integer :printful_varient_id
+      t.integer :printful_variant_id
       t.string :name
       t.string :image
       t.decimal :cc_price
