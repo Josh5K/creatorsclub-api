@@ -21,8 +21,8 @@ module Api
                             p.name = product['name'][9...1000]
                             p.seller = seller[0]
                             p.save
-                        elsif existingProduct == 1
-                            existingProduct[0].name = product['name']
+                        elsif existingProduct.count == 1
+                            existingProduct[0].name = product['name'][9...1000]
                             existingProduct[0].save
                         end
                     end
@@ -45,17 +45,25 @@ module Api
                         existingVariant = Variant.where(:printful_variant_id => variant['id'])
                         if existingVariant.count == 0
                             v = Variant.new
-                            v.printful_variant_id = variant['id']
+                            v.printful_variant_id = variant['variant_id']
                             v.name = variant['name'][9...1000]
-                            v.image = variant['files'][1]['preview_url']
+                            variant['files'].each do |file|
+                                if file['filename'].include? 'mockup'
+                                    v.image = file['preview_url']
+                                end
+                            end
                             v.cc_price = variant['retail_price']
                             v.seller_price = variant['retail_price']
                             product.variant << v
                         elsif existingVariant.count == 1
-                            existingVariant.printful_variant_id = variant['id']
-                            existingVariant.name = variant['name']
-                            existingVariant.image = variant['Files'][1]['preview_url']
-                            existingVariant.cc_price = variant['retail_price']
+                            existingVariant[0].printful_variant_id = variant['id']
+                            existingVariant[0].name = variant['name']
+                            variant['files'].each do |file|
+                                if file['filename'].include? 'mockup'
+                                    existingVariant[0].image = file['preview_url']
+                                end
+                            end
+                            existingVariant[0].cc_price = variant['retail_price']
                         end
                     end
                 end

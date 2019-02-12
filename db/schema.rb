@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2019_02_08_191442) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password"
+    t.string "password_digest"
     t.string "email"
     t.string "profile_picture"
     t.string "youtube"
@@ -89,7 +90,7 @@ ActiveRecord::Schema.define(version: 2019_02_08_191442) do
   end
 
   create_table "variants", force: :cascade do |t|
-    t.integer "printful_variant_id"
+    t.integer "printful_varient_id"
     t.string "name"
     t.string "image"
     t.decimal "cc_price"
