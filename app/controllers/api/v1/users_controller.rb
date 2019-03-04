@@ -8,7 +8,7 @@ module Api
                 columns = User.attribute_names - exclude_columns
                 users = User.select(columns).all
                 if params['include'] = 'sellers'
-                    render status: 200, json: { message: user.as_json(:include => :sellers) }
+                    render status: 200, json: { message: users.as_json(:include => :sellers) }
                 else
                     render status: 200, json: { message: users }
                 end
@@ -76,6 +76,7 @@ module Api
                 if request.headers['password'].present?
                     u.password = request.headers['password']
                 end
+                u.save
                 render status: 200, json: { message: "#{u.username} has been updated!"}
             end
 

@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(version: 2019_02_08_191442) do
   create_table "sellers", force: :cascade do |t|
     t.integer "category"
     t.boolean "active"
+    t.string "seller_title"
+    t.string "seller_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

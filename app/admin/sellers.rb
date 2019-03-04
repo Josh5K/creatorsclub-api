@@ -12,6 +12,6 @@ ActiveAdmin.register Seller do
 #   permitted
 # end
 
-permit_params :user_id, :category, :active, :user_id
+permit_params :user_id, :category, :active, :user_id, :sellers_title, :sellers_name
 
 end

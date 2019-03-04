@@ -37,5 +37,16 @@ module CreatorsclubApi
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use Rack::MethodOverride
+
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*',
+          :headers => :any,
+          :methods => [:get, :put, :patch, :options],
+          :max_age => 15
+      end
+    end
+
   end
 end

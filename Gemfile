@@ -52,3 +52,5 @@ gem 'sassc-rails', '>= 2.0.0'
 gem 'dotenv-rails'
 gem "rest-client"
 gem 'bcrypt'
+gem 'rack-cors'
+gem 'jbuilder'
