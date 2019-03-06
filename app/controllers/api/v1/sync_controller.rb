@@ -54,6 +54,11 @@ module Api
                             end
                             v.cc_price = variant['retail_price']
                             v.seller_price = variant['retail_price']
+                            if(variant['name'].include?('/'))
+                                options = variant['name'][12 + product.name.length... variant['name'].length]
+                                v.color = options.split('/')[0]
+                                v.size = options.split('/')[1]
+                            end
                             product.variant << v
                         elsif existingVariant.count == 1
                             existingVariant[0].printful_variant_id = variant['id']

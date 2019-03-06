@@ -19,6 +19,13 @@ module Api
                     render status: 200, json: { message: products }
                 end
             end
+
+            def show
+                productid = params[:id]
+                product = Product.where(:id => productid).first
+
+                render status: 200, json: { product: product.as_json(:include => :variant) }
+            end
         end
     end
 end
