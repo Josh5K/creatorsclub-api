@@ -56,8 +56,8 @@ module Api
                             v.seller_price = variant['retail_price']
                             if(variant['name'].include?('/'))
                                 options = variant['name'][12 + product.name.length... variant['name'].length]
-                                v.color = options.split('/')[0]
-                                v.size = options.split('/')[1]
+                                v.color = options.split('/')[0].strip
+                                v.size = options.split('/')[1].strip
                             end
                             product.variant << v
                         elsif existingVariant.count == 1
