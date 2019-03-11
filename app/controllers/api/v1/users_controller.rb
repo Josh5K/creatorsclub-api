@@ -1,12 +1,14 @@
 module Api
     module V1
-        class UsersController < ApplicationController
+        class UsersController < Api::ApiController
             skip_before_action :verify_authenticity_token
+            before_action :authenticate
 
             def index
-                exclude_columns = ['password']
+                exclude_columns = ['password', 'password_digest']
                 columns = User.attribute_names - exclude_columns
                 users = User.select(columns).all
+                createEvent("user#index")
                 if params['include'] = 'sellers'
                     render status: 200, json: { message: users.as_json(:include => :sellers) }
                 else
@@ -15,10 +17,11 @@ module Api
             end
 
             def show
-                exclude_columns = ['password']
+                exclude_columns = ['password', 'password_digest']
                 columns = User.attribute_names - exclude_columns
                 email =  Base64.urlsafe_decode64(params[:id])
                 user = User.select(columns).where(:email => email)
+                createEvent("user#show/#{email}")
                 if params['include'] == 'sellers'
                     render status: 200, json: { message: user.as_json(:include => :sellers) }
                 else
@@ -29,8 +32,10 @@ module Api
             def signin
                 user = User.where(:email => request.headers['email'])
                 if user.count == 1 && user[0].authenticate(request.headers['password'])
+                    createEvent("user#signin - Successful")
                     render status: 200, json: { message: "Login Successful" }
                 else
+                    createEvent("user#signin - Error")
                     render status: 401, json: { message: "HTTP 401" }
                 end
             end
@@ -46,15 +51,20 @@ module Api
                 u.twitch = request.headers['twitch']
                 u.about = request.headers['about']
                 u.password = request.headers['password']
+
                 if u.save
-                    render status: 200, json: { message: u }
+                    createEvent("user#create - Successful")
+                    render status: 200, json: { message: "User Created!" }
                 else
+                    createEvent("user#create - Error")
                     render status: 500, json: "ERROR HTTP 500"
                 end
             end
 
             def update
-                u = User.where(:username => params[:username]).first
+                exclude_columns = ['password', 'password_digest']
+                columns = User.attribute_names - exclude_columns
+                u = User.select(columns).where(:username => params[:username]).first
                 if request.headers['email'].present?
                     u.email = request.headers['email']
                 end
@@ -76,10 +86,14 @@ module Api
                 if request.headers['password'].present?
                     u.password = request.headers['password']
                 end
-                u.save
-                render status: 200, json: { message: "#{u.username} has been updated!"}
+                if u.save
+                    createEvent("user#update - Successful")
+                    render status: 200, json: { message: "#{u.username} has been updated!"}
+                else
+                    createEvent("user#update - Error")
+                    render status: 500, json: { message: "Error updating user" }
+                end
             end
-
         end
     end
 end
