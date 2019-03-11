@@ -26,12 +26,20 @@ if Rails.env.development?
     seller = Seller.create(category: 111222, active: true, seller_title: "Content Creator", seller_name: "Welyns Store");
     user.sellers << seller
 
-    uri = URI.parse("http://localhost:3000/api/v1/sync/products")
-    response = Net::HTTP.get_response(uri)
-
-    uri = URI.parse("http://localhost:3000/api/v1/sync/variants")
-    response = Net::HTTP.get_response(uri)
-
     AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
+    headers = {
+        "X-Api-Key" => AdminUser.first.api_key
+    }
+
+    HTTParty.get(
+        "http://localhost:3000/api/v1/sync/products",
+        :headers => headers
+    )
+
+    HTTParty.get(
+        "http://localhost:3000/api/v1/sync/variants",
+        :headers => headers
+    )
 
 end

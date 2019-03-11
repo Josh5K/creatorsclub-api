@@ -54,3 +54,4 @@ gem "rest-client"
 gem 'bcrypt'
 gem 'rack-cors'
 gem 'jbuilder'
+gem 'httparty'

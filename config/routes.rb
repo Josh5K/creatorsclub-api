@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :sellers
       resources :products
       resources :variants
+      resources :events
       get 'sync/products', to: 'sync#products'
       get 'sync/variants', to: 'sync#variants'
       get 'users/seller/:category', to: 'users#sellers'

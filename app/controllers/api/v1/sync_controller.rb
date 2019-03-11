@@ -1,6 +1,8 @@
 module Api
     module V1
-        class SyncController < ApplicationController
+        class SyncController < Api::ApiController
+            before_action :authenticate
+
             def products
                 products = RestClient::Request.execute(
                     method: :get,
@@ -27,6 +29,7 @@ module Api
                         end
                     end
                 end
+                createEvent("sync#products")
                 render status: 200, json: { message: "Product Sync Completed!" }
             end
             def variants
@@ -72,6 +75,7 @@ module Api
                         end
                     end
                 end
+                createEvent("sync#variants")
                 render status: 200, json: { message: "Variant Sync Completed!" }
             end
         end
