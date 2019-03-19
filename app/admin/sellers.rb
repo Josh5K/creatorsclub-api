@@ -12,6 +12,14 @@ ActiveAdmin.register Seller do
 #   permitted
 # end
 
-permit_params :user_id, :category, :active, :user_id, :sellers_title, :sellers_name
+form do |f|
+    f.inputs 'Seller' do
+        f.semantic_errors
+        f.inputs
+        f.input :user, as: :check_boxes, collection: User.select(:email, :id)
+    end
+    f.actions
+end
 
+permit_params :user_id, :category, :active, :user_id, :sellers_title, :sellers_name, { users: [] }
 end

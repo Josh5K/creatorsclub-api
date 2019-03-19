@@ -30,27 +30,28 @@ module Api
             end
 
             def signin
-                user = User.where(:email => request.headers['email'])
-                if user.count == 1 && user[0].authenticate(request.headers['password'])
+                user = User.where(:email => params['email']).first
+                isSeller = user.sellers[0] != nil
+                if user.authenticate(params['password'])
                     createEvent("user#signin - Successful")
-                    render status: 200, json: { message: "Login Successful" }
+                    render status: 200, json: { message: "Logged In", seller: isSeller }
                 else
                     createEvent("user#signin - Error")
-                    render status: 401, json: { message: "HTTP 401" }
+                    render status: 401, json: { message: "User failed to authenticate" }
                 end
             end
 
             def create
                 u = User.create
-                u.username = request.headers['username']
-                u.email = request.headers['email']
-                u.profile_picture = request.headers['profile_picture']
-                u.youtube = request.headers['youtube']
-                u.twitter = request.headers['twitter']
-                u.facebook = request.headers['facebook']
-                u.twitch = request.headers['twitch']
-                u.about = request.headers['about']
-                u.password = request.headers['password']
+                u.username = params['username']
+                u.email = params['email']
+                u.profile_picture = params['profile_picture']
+                u.youtube = params['youtube']
+                u.twitter = params['twitter']
+                u.facebook = params['facebook']
+                u.twitch = params['twitch']
+                u.about = params['about']
+                u.password = params['password']
 
                 if u.save
                     createEvent("user#create - Successful")
