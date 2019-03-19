@@ -40,7 +40,7 @@ module CreatorsclubApi
 
     config.middleware.use Rack::Cors do
       allow do
-        origins '*'
+        origins '/^(.*\.|)creatorsclub\.net$/'
         resource '*',
           :headers => :any,
           :methods => [:get, :put, :patch, :options],
