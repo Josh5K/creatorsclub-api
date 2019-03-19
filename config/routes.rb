@@ -15,10 +15,13 @@ Rails.application.routes.draw do
       resources :products
       resources :variants
       resources :events
+
+      #Get
       get 'sync/products', to: 'sync#products'
       get 'sync/variants', to: 'sync#variants'
       get 'users/seller/:category', to: 'users#sellers'
-      get '/signin', to: 'users#signin'
+      #Post
+      post 'users/signin', to: 'users#signin'
       #post 'users/create', to: 'users#create'
       post 'sellers/link', to: 'sellers#link'
     end
