@@ -1,11 +1,9 @@
-ActiveAdmin.register_page "Dashboard" do
+# frozen_string_literal: true
 
+ActiveAdmin.register_page 'Dashboard' do
+  menu priority: 1, label: proc { I18n.t('active_admin.dashboard') }
 
-
-  menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
-
-  content title: proc{ I18n.t("active_admin.dashboard") } do
-
+  content title: proc { I18n.t('active_admin.dashboard') } do
     # Here is an example of a simple dashboard with columns and panels.
     #
     # columns do
@@ -21,7 +19,7 @@ ActiveAdmin.register_page "Dashboard" do
 
     columns do
       column do
-        panel "Recent Users" do
+        panel 'Recent Users' do
           ul do
             User.last(10).reverse.map do |user|
               li "#{user.username} - #{user.email}"
@@ -30,7 +28,7 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
       column do
-        panel "Recent Orders" do
+        panel 'Recent Orders' do
           ul do
             @arbre_context.assigns[:@orders['result']] do |order|
               li order['id']

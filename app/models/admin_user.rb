@@ -1,5 +1,6 @@
-class AdminUser < ApplicationRecord
+# frozen_string_literal: true
 
+class AdminUser < ApplicationRecord
   def generate_api_key
     loop do
       token = SecureRandom.base64.tr('+/=', 'Qrt')

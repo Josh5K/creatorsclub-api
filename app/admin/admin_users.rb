@@ -1,29 +1,30 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register AdminUser do
-    permit_params :email, :password, :password_confirmation, :api_key
+  permit_params :email, :password, :password_confirmation, :api_key
 
-    index do
-        selectable_column
-        id_column
-        column :email
-        column :current_sign_in_at
-        column :sign_in_count
-        column :created_at
-        column :api_key
-        actions
+  index do
+    selectable_column
+    id_column
+    column :email
+    column :current_sign_in_at
+    column :sign_in_count
+    column :created_at
+    column :api_key
+    actions
+  end
+
+  filter :email
+  filter :current_sign_in_at
+  filter :sign_in_count
+  filter :created_at
+
+  form do |f|
+    f.inputs do
+      f.input :email
+      f.input :password
+      f.input :password_confirmation
     end
-
-    filter :email
-    filter :current_sign_in_at
-    filter :sign_in_count
-    filter :created_at
-
-    form do |f|
-        f.inputs do
-            f.input :email
-            f.input :password
-            f.input :password_confirmation
-        end
-        f.actions
-    end
-
+    f.actions
+  end
 end

@@ -1,9 +1,11 @@
-class Seller < ApplicationRecord
-    has_and_belongs_to_many :users, join_table: :users_sellers
-    accepts_nested_attributes_for :users
-    has_many :product
+# frozen_string_literal: true
 
-    def to_s
-        self.seller_name
-    end
+class Seller < ApplicationRecord
+  has_and_belongs_to_many :users, join_table: :users_sellers
+  accepts_nested_attributes_for :users
+  has_many :product
+
+  def to_s
+    seller_name
+  end
 end

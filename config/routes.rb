@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
   config = ActiveAdmin::Devise.config
@@ -16,13 +18,13 @@ Rails.application.routes.draw do
       resources :variants
       resources :events
 
-      #Get
+      # Get
       get 'sync/products', to: 'sync#products'
       get 'sync/variants', to: 'sync#variants'
       get 'users/seller/:category', to: 'users#sellers'
-      #Post
+      # Post
       post 'users/signin', to: 'users#signin'
-      #post 'users/create', to: 'users#create'
+      # post 'users/create', to: 'users#create'
       post 'sellers/link', to: 'sellers#link'
     end
   end

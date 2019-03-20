@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -30,7 +32,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
@@ -40,18 +42,17 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'activeadmin'
-gem 'devise'
-gem 'turbolinks'
-gem 'bootstrap-sass', '~> 3.4.0'
-gem 'sassc-rails', '>= 2.0.0'
-gem 'dotenv-rails'
-gem "rest-client"
 gem 'bcrypt'
-gem 'rack-cors'
-gem 'jbuilder'
+gem 'bootstrap-sass', '~> 3.4.0'
+gem 'devise'
+gem 'dotenv-rails'
 gem 'httparty'
+gem 'jbuilder'
+gem 'rack-cors'
+gem 'rest-client'
+gem 'sassc-rails', '>= 2.0.0'
+gem 'turbolinks'

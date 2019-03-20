@@ -1,9 +1,11 @@
-class User < ApplicationRecord
-    has_secure_password
-    has_and_belongs_to_many :sellers, join_table: :users_sellers
-    accepts_nested_attributes_for :sellers
+# frozen_string_literal: true
 
-    def to_s
-        self.email
-    end
+class User < ApplicationRecord
+  has_secure_password
+  has_and_belongs_to_many :sellers, join_table: :users_sellers
+  accepts_nested_attributes_for :sellers
+
+  def to_s
+    email
+  end
 end
